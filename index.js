@@ -3,9 +3,11 @@ let cards = [];
 let firstCard, secondCard;
 let lockBoard = false;
 let score = 0;
-
+let point=0
 document.querySelector(".score").textContent = score;
 
+
+// 
 fetch("./data/cards.json")
   .then((res) => res.json())
   .then((data) => {
@@ -55,22 +57,32 @@ function flipCard() {
   }
 
   secondCard = this;
-  score++;
-  document.querySelector(".score").textContent = score;
   lockBoard = true;
 
   checkForMatch();
+
 }
 
 function checkForMatch() {
   let isMatch = firstCard.dataset.name === secondCard.dataset.name;
-
   isMatch ? disableCards() : unflipCards();
+  if(isMatch==true){
+    point++;
+    score++;
+
+
+  }
+  document.querySelector(".score").innerHTML = score;
+
+  // console.log(score);
+
+
 }
 
 function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
+
 
   resetBoard();
 }
@@ -87,6 +99,7 @@ function resetBoard() {
   firstCard = null;
   secondCard = null;
   lockBoard = false;
+
 }
 
 function restart() {
