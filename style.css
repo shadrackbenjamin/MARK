@@ -70,7 +70,9 @@ p {
 .card .front {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
+  transform: rotateY(180deg);
+
 }
 
 .card .back {
@@ -80,6 +82,3 @@ p {
   backface-visibility: hidden;
 }
 
-.card .front {
-  transform: rotateY(180deg);
-}
