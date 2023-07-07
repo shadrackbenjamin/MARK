@@ -7,7 +7,7 @@ let point=0
 document.querySelector(".score").textContent = score;
 
 
-// 
+// FETCHING OF DATA FROM DATA FOLDER
 fetch("./data/cards.json")
   .then((res) => res.json())
   .then((data) => {
@@ -15,7 +15,8 @@ fetch("./data/cards.json")
     shuffleCards();
     generateCards();
   });
-
+  
+// SHUFFLE CARDS FUNCTION
 function shuffleCards() {
   let currentIndex = cards.length,
     randomIndex,
@@ -28,7 +29,7 @@ function shuffleCards() {
     cards[randomIndex] = temporaryValue;
   }
 }
-
+//FUNCTION TO CREATE A CARD AND FLIP IT ON CLICK 
 function generateCards() {
   for (let card of cards) {
     const cardElement = document.createElement("div");
@@ -45,6 +46,7 @@ function generateCards() {
   }
 }
 
+// FUNCTION TO FLIP TWO CARDS.
 function flipCard() {
   if (lockBoard) return;
   if (this === firstCard) return;
@@ -63,6 +65,7 @@ function flipCard() {
 
 }
 
+// FUNCTION TO CHECK IF FLIPPED CARDS MATCH
 function checkForMatch() {
   let isMatch = firstCard.dataset.name === secondCard.dataset.name;
   isMatch ? disableCards() : unflipCards();
@@ -79,6 +82,7 @@ function checkForMatch() {
 
 }
 
+// FUNCTION TO DISABLE CARDS IF THEY DONT MATCH
 function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
@@ -87,6 +91,7 @@ function disableCards() {
   resetBoard();
 }
 
+// TIMEOUT FUNCTION TO UNFLIP WHEN CARDS DO NOT MATCH
 function unflipCards() {
   setTimeout(() => {
     firstCard.classList.remove("flipped");
@@ -95,6 +100,7 @@ function unflipCards() {
   }, 1000);
 }
 
+// FUNCTION TO RESET BOARD WHEN CARDS DO NOT MATCH
 function resetBoard() {
   firstCard = null;
   secondCard = null;
@@ -102,6 +108,8 @@ function resetBoard() {
 
 }
 
+
+// FUNCTION TO RESET AND SHUFFLE BOARD WHEN ONE WINS.
 function restart() {
   resetBoard();
   shuffleCards();
