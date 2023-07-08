@@ -7,7 +7,13 @@ let point=0
 document.querySelector(".score").textContent = score;
 
 
-// FETCHING OF DATA FROM DATA FOLDER
+// FETCHING OF DATA FROM DATA FOLDER  using json file.
+// one will ask what a json is 
+// 
+// JSON stands for JavaScript Object Notation
+// JSON is a lightweight format for storing and transporting data
+// JSON is often used when data is sent from a server to a web page
+// JSON is "self-describing" and easy to understand 
 fetch("./data/cards.json")
   .then((res) => res.json())
   .then((data) => {
